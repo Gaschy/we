@@ -24,7 +24,7 @@ public class GameBean implements Serializable {
     private Integer winner = 0;
     private long time = 0;
     private String time_h = "00:00";
-
+    private ArrayList<Integer> oil_fields = new ArrayList<Integer>(Arrays.asList(2,5));
 
     public void setPlayer( String value )
 	{
@@ -108,6 +108,11 @@ public class GameBean implements Serializable {
 	    road_len = value;
 	}
 
+    public void setOil_fields( ArrayList<Integer> value )
+	{
+	    oil_fields = value;
+	}
+
     public void setTime( long value )
 	{
 	    time = value;
@@ -132,6 +137,7 @@ public class GameBean implements Serializable {
     public Integer getWinner() { return winner; }
     public long getTime() { return time; }
     public String getTime_h() { return time_h; }
+    public ArrayList<Integer> getOil_fields() { return oil_fields; }
 
     public String getActive() { 
 	if (active == 1)

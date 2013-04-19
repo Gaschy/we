@@ -55,6 +55,9 @@ public class f0Servlet extends HttpServlet {
 		
 		if (player_pos >= gamebean.getRoad_len()) {
 		    gamebean.setWinner(1);
+		    gamebean.setAi_die(0);
+		    int ai_pos_old = gamebean.getAi_pos();
+		    gamebean.setAi_pos_old(ai_pos_old);
 		}
 		else {
 		    gamebean.setAi_die(die2);
@@ -67,6 +70,13 @@ public class f0Servlet extends HttpServlet {
 			gamebean.setWinner(2);
 		    }
 		}
+	    }
+	    else
+	    {
+		int player_pos_old = gamebean.getPlayer_pos();
+		gamebean.setPlayer_pos_old(player_pos_old);
+		int ai_pos_old = gamebean.getAi_pos();
+		gamebean.setAi_pos_old(ai_pos_old);
 	    }
 	    /*	    RequestDispatcher dispatcher = 
 		getServletContext().getRequestDispatcher("/process.jsp");

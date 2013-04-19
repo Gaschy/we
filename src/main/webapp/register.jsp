@@ -37,14 +37,15 @@
                             <tr><th id="player1NameLabel" class="label">Spieler 1</th><td id="player1Name" class="data"><%= gamebean.getPlayer() %></td></tr>
                             <tr><th id="player2NameLabel" class="label">Spieler 2</th><td id="player2Name" class="data"><%= gamebean.getAi() %></td></tr>
                         </table>    	  
-                        <h2>GameBean</h2>
+                        <!-- DEBUG<h2>GameBean</h2>
                         <table>
                             <tr><th class="label">Player Pos</th><td class="data"><%= gamebean.getPlayer_pos() %></td></tr>
                             <tr><th class="label">Die</th><td class="data"><%= gamebean.getPlayer_die() %></td></tr>
 			    <tr><th class="label">role die</th><td class="data"><a href="#" id="die">role..</a></td></tr>
 			    <tr><th class="label">kill session</th><td class="data"><a href="process.jsp?action=killsession" id="die">now</a></td></tr>
 			    <tr><th class="label">load car</th><td class="data"><a href="#" id="load">now</a></td></tr>
-                        </table>    	  
+                        </table>  
+  			/DEBUG -->
                     </div>
                     <div class="field">
                         <h2 class="accessibility">Spielbereich</h2>
@@ -162,12 +163,20 @@ function animate(input) {
        driver = "ai";
     }    
 
+    var pos1;
     prepareAnimation();
     $(car).fadeOut(700, function() {
-	var pos1 = get_pos(driver, "cur");
+	pos1 = get_pos(driver, "cur");
 	$(car).appendTo(pos1);
 	$(car).fadeIn(700,completeAnimation);                    
     });
+    
+    /*if( $(pos1).hasClass('oil_road') ) {
+       document.title = "oil found";
+    }
+    else {
+       document.title = "eh eh";
+    } */      
     return false;
 }
 
@@ -176,17 +185,23 @@ $(document).ready(function() {
     var pos2 = get_pos("ai", "cur");
     var pos1_old = get_pos("player", "old");
     var pos2_old= get_pos("ai", "old");
+
     var player = '<span id="player1"><span class="accessibility"><em>Spieler 1</em></span></span>';
     var ai = '<span id="player2"><span class="accessibility"><em>Spieler 2</em></span></span>';
+
     $(player).appendTo(pos1_old);
     $(ai).appendTo(pos2_old);
-    animate("player");
-    var wait = setInterval(function() {
-       if ($("#player1:not(animated)")) {
-             clearInterval(wait);
-             animate("ai");
-            }
-       }, 2000);
+    if ( pos1 != pos1_old)
+        animate("player");
+   
+    if ( pos2 != pos2_old) {
+      var wait = setInterval(function() {
+      if ($("#player1:not(animated)")) {
+         clearInterval(wait);
+         animate("ai");
+         }
+      }, 1000);
+    }
 });
 
 $('#load').click(function() {
