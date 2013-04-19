@@ -4,14 +4,23 @@
 <description>Formel 0 Racing Game Servlet</description>
 <display-name>Formel 0</display-name>
 <servlet>
-  <servlet-name>f0</servlet-name>
-  <servlet-class>ag83.f0Servlet</servlet-class>
+  <servlet-name>f0Servlet</servlet-name>
+  <servlet-class>formel0.f0Servlet</servlet-class>
 </servlet>
 
 <servlet-mapping>
-  <servlet-name>f0</servlet-name>
-  <url-pattern>/f0.do</url-pattern>
+  <servlet-name>f0Servlet</servlet-name>
+  <url-pattern>/process.jsp</url-pattern>
 </servlet-mapping>
+
+<servlet-mapping>
+  <servlet-name>f0Servlet</servlet-name>
+  <url-pattern>/index.jsp</url-pattern>
+</servlet-mapping>
+
+<welcome-file-list>
+  <welcome-file>index.jsp</welcome-file>
+</welcome-file-list>
 
 
 </web-app>

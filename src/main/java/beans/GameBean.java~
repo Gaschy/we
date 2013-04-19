@@ -1,0 +1,20 @@
+package beans;
+
+import java.io.*;
+import java.util.*;
+
+
+public class GameBean implements Serializable {
+
+    private String player;
+    private String ai;
+
+    private Integer player_pos;
+    private Integer ai_pos;
+
+    private Integer die;
+    
+    private Integer leader;
+
+    
+}

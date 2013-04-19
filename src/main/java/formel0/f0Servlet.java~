@@ -1,0 +1,86 @@
+package formel0;
+
+import formel0.*;
+import beans.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.util.*;
+import java.net.*;
+
+public class f0Servlet extends HttpServlet {
+
+    private UUID id = UUID.randomUUID();
+    private static int i = 0;
+    public void doGet( HttpServletRequest request,
+			HttpServletResponse response)
+	throws IOException, ServletException {
+	
+
+	// set up writer and session
+	PrintWriter out = response.getWriter();
+	HttpSession session = request.getSession(true);
+
+	// check parameter
+	String action = request.getParameter("action");
+	out.println(action);
+
+	// get or create gamebean
+	GameBean gamebean = (GameBean) request.getSession().getAttribute("gamebean");
+	if(gamebean == null)
+	{
+	    gamebean = new GameBean();
+	    gamebean.setDie(1);
+	    gamebean.setPlayer_pos(0);
+	    gamebean.setAi_pos(0);
+	    session.setAttribute("gamebean", gamebean);
+	}
+	Random rand = new Random();
+
+	if (action != null && action.equals("die"))
+	{
+	    int die = rand.nextInt(3) + 1;
+	    gamebean.setDie(die);
+	    gamebean.setPlayer_pos(gamebean.getPlayer_pos() + die);
+	    
+	    RequestDispatcher dispatcher = 
+		getServletContext().getRequestDispatcher("/register.jsp");
+	    dispatcher.forward(request, response);
+	    //response.sendRedirect("index.jsp");
+	    return;
+	}
+	else
+	{
+//	    response.sendRedirect("register.jsp");
+	}
+
+/*
+	String title = "Formel 0";
+	String heading;
+	if (session.isNew()) {
+	    heading = "hey newbie ;)";
+	    id = UUID.randomUUID();
+	    session.setAttribute("id", id.toString());
+	}
+	else
+	{
+	    heading = "wb!";
+	}
+
+	
+	out.println("<head><title>" + title +
+		    "</title></head>" +
+		    "<body>\n" + 
+		    "<h1>" + heading + "</h1>" +
+		    "<p>id is " + id + "</p>");
+	
+	for(String cur: Collections.list(session.getAttributeNames()))
+	    out.println(cur);
+
+	out.println("</body></html>");
+		    
+	response.sendRedirect("index.jsp");*/
+    }
+
+
+}

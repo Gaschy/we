@@ -1,10 +1,13 @@
-package user;
+package beans;
 
-public class UserData {
+public class UserBean implements java.io.Serializable {
 
-    String username;
-    String email;
-    int age;
+    private String username;
+    private String email;
+    private int id;
+
+    public UserBean() {
+    }
 
     public void setUsername( String value )
     {
@@ -16,15 +19,15 @@ public class UserData {
         email = value;
     }
 
-    public void setAge( int value )
+    public void setId( int value )
     {
-        age = value;
+        id = value;
     }
 
     public String getUsername() { return username; }
 
     public String getEmail() { return email; }
 
-    public int getAge() { return age; }
+    public int getId() { return id; }
 
 }
